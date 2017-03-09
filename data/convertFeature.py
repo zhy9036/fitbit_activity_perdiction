@@ -100,7 +100,7 @@ def convert(filename, mode):
 				hourlist.append('N/A')
 			new_rows.append(hourlist)
 			count = count + 1
-	with open ('../normalized/' + 'normalized_std_hour_' + filename, 'wb') as f:
+	with open ('../normalized_std/' + 'normalized_std_hour_' + filename, 'wb') as f:
 		writer = csv.writer(f)
 		writer.writerows(new_rows)
 			
