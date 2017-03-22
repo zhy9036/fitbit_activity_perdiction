@@ -1,6 +1,6 @@
 import csv, os, numpy
 
-def convertToHour(stepList):
+def convertToHourFeature(stepList):
 	hourlist = []
 	rst = []
 	hourlist.append(stepList[0])
@@ -19,6 +19,20 @@ def convertToHour(stepList):
 		else:
 			rst.append(1) if hourlist[i] >= day_avg else rst.append(0)
 	return rst
+
+def convertToHour(stepList):
+	hourlist = []
+	
+	hourlist.append(stepList[0])
+	total_steps = 0
+	for i in xrange(1, len(stepList)-5, 4):
+		hoursteps = 0
+		for j in range(i, i+4):
+			hoursteps = hoursteps + int(stepList[j])
+			total_steps = total_steps + int(stepList[j])
+		hourlist.append(hoursteps)
+	
+	return hourlist
 
 def convertToNormalized_std_mean(stepList):
 	hourlist = []
@@ -100,17 +114,42 @@ def convert(filename, mode):
 				hourlist.append('N/A')
 			new_rows.append(hourlist)
 			count = count + 1
-	with open ('../normalized_std/' + 'normalized_std_hour_' + filename, 'wb') as f:
+	with open ('../hour_steps/' + 'hour_steps_' + filename, 'wb') as f:
 		writer = csv.writer(f)
 		writer.writerows(new_rows)
 			
+def convert_pixel_feature(filenames):
+	os.chdir('/home/leozhang/Desktop/fitbit/hour_steps')
+	pixel_feature_vectors = []
+	for filename in filenames:
+		with open (filename, 'rb') as f:
+			reader = list(csv.reader(f))
+			
+			for i in range(len(reader)):
+				row0 = reader[i-1][1:len(reader[i-1])-1] if i > 0 else [0 for x in range(15)] 
+				row = reader[i][1:len(reader[i])-1]
+				row1 = reader[i+1][1:len(reader[i+1])-1] if i < len(reader) - 1 else [0 for x in range(15)]
+				for j in range(len(row)):
+					pixel = []
+					pixel.append(row[j])
+					pixel.append(row0[j])
+					pixel.append(row1[j])
+					pixel.append(filename.split("_")[2])
+					pixel_feature_vectors.append(pixel)
+	with open ('../image_vector_data/' + 'image_vector', 'wb') as f:
+		writer = csv.writer(f)
+		writer.writerows(pixel_feature_vectors)
 
 
-dir = '/home/leozhang/Desktop/fitbit/data'
-if not os.path.exists('../normalized_std'):
-	os.makedirs('../normalized_std')
+
+dir = '/home/leozhang/Desktop/fitbit/hour_steps'
+if not os.path.exists('../image_vector_data'):
+	os.makedirs('../image_vector_data')
 for root, dirs, filenames in os.walk(dir):
+	convert_pixel_feature(filenames)
+	'''
 	for f in filenames:
 		if f.endswith(".csv"):
 			#print f
-			convert(f, 2)
+			convert(f, 1)
+	'''
