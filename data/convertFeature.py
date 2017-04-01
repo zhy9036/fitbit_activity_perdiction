@@ -136,7 +136,7 @@ def convert_pixel_feature(filenames):
 					pixel.append(row1[j])
 					pixel.append(filename.split("_")[2])
 					pixel_feature_vectors.append(pixel)
-	with open ('../image_vector_data/' + 'image_vector', 'wb') as f:
+	with open ('../image_vector_data/' + 'image_vector_4', 'wb') as f:
 		writer = csv.writer(f)
 		writer.writerows(pixel_feature_vectors)
 
