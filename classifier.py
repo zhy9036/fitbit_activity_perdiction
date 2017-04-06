@@ -14,25 +14,7 @@ In our setup, we:
 So that we have 1000 training examples for each class, and 400 validation examples for each class.
 In summary, this is our directory structure:
 ```
-data/
-    train/
-        dogs/
-            dog001.jpg
-            dog002.jpg
-            ...
-        cats/
-            cat001.jpg
-            cat002.jpg
-            ...
-    validation/
-        dogs/
-            dog001.jpg
-            dog002.jpg
-            ...
-        cats/
-            cat001.jpg
-            cat002.jpg
-            ...
+
 ```
 '''
 
@@ -44,7 +26,7 @@ from keras import backend as K
 
 
 # dimensions of our images.
-img_width, img_height = 600, 400
+img_width, img_height = 500, 300
 
 train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'

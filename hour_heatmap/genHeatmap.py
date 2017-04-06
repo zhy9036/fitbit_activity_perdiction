@@ -2,7 +2,7 @@ import plotly.plotly as p
 import plotly.offline as offline
 from plotly.offline import download_plotlyjs, init_notebook_mode, iplot
 import plotly.graph_objs as go
-import csv,os
+import csv,os, time
 
 
 #p.offline.init_notebook_mode()
@@ -27,12 +27,22 @@ for root, dirs, filenames in os.walk(dir):
 		data = []
 		with open(filename, 'rb') as f:
 			reader = csv.reader(f)
+			day = 0
 			for line in reader:
 				data.append(line[1:len(line)-1])
-		fig = [go.Heatmap(z=data)]
-		name = filename.split(".")
-		#p.image.save_as(fig, filename=name[0] + ".png")
-		offline.plot({'data': fig,
-               'layout': {'title': name[0],
-                          'font': dict(size=16)}},
-             image='png', filename = name[0], validate = False)
+				day += 1
+				if day % 7 == 0:
+					name = filename.split(".")
+					#print name[0], day/7
+					fig = [go.Heatmap(z=data)]
+					
+					#p.image.save_as(fig, filename=name[0] + ".png")
+					
+					offline.plot({'data': fig,
+			               'layout': {'title': '%s: week %d'%(name[0], day/7),
+			                          'font': dict(size=16)}},
+			             image='png', image_filename = '%s: week %d'%(name[0], day/7), validate = False)
+			        
+					data = []
+					time.sleep(5)
+					#exit()
