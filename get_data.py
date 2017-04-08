@@ -68,13 +68,13 @@ def get_monthData(month, days, filename):
 
 #get_monthData(5, 31, 'glb70_may.csv')
 #get_monthData(3, 31, 'glb70_march.csv')
-get_monthData(7, 31, 'glb85_july.csv')
-get_monthData(8, 31, 'glb85_aug.csv')
-get_monthData(7, 31, 'glb86_july.csv')
-get_monthData(8, 31, 'glb86_aug.csv')
-get_monthData(7, 31, 'glb87_july.csv')
-get_monthData(8, 31, 'glb87_aug.csv')
-get_monthData(7, 31, 'glb88_july.csv')
-get_monthData(8, 31, 'glb88_aug.csv')
+get_monthData(6, 30, 'glb89_june.csv')
+#get_monthData(3, 31, 'glb89_aug.csv')
+get_monthData(6, 30, 'glb90_june.csv')
+#get_monthData(3, 31, 'glb90_aug.csv')
+get_monthData(6, 30, 'glb91_june.csv')
+#get_monthData(3, 31, 'glb91_aug.csv')
+get_monthData(6, 30, 'glb92_june.csv')
+#get_monthData(3, 31, 'glb92_aug.csv')
 
 #print act
